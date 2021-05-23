@@ -1,4 +1,3 @@
-
 import 'package:health_diary/services/repository.dart';
 
 class ChartsRepository extends Repository {

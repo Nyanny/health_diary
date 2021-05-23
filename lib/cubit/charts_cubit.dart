@@ -7,13 +7,12 @@ class ChartsCubit extends Cubit<TabBarState> {
 
   final ChartsRepository repository;
 
-  Future<void> load() async{
+  Future<void> load() async {
     try {
       emit(LoadingTabState());
       final List charts = await this.repository.getData();
       emit(LoadedTabState(loadedData: charts));
-    }
-    catch (e){
+    } catch (e) {
       emit(ErrorLoadingTabState());
     }
   }

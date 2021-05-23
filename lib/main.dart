@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_diary/cubit/appbar_cubit.dart';
+import 'package:health_diary/cubit/appbar_state.dart';
 import 'package:health_diary/cubit/charts_cubit.dart';
 import 'package:health_diary/cubit/indicators_cubit.dart';
 import 'package:health_diary/pages/home_page.dart';
@@ -13,19 +15,23 @@ void main() {
 class MyApp extends StatelessWidget {
   final chartsRepository = ChartsRepository();
   final indicatorsRepository = IndicatorsRepository();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MultiBlocProvider(
         providers: [
+          BlocProvider<ChartsCubit>(
+            create: (context) =>
+                ChartsCubit(repository: chartsRepository)..load(),
+          ),
           BlocProvider<IndicatorsCubit>(
             create: (context) =>
-                IndicatorsCubit(repository: indicatorsRepository)..load(),
+                IndicatorsCubit(repository: indicatorsRepository),
           ),
-          BlocProvider<ChartsCubit>(
-            create: (context) => ChartsCubit(repository: chartsRepository),
+          BlocProvider<AppBarCubit>(
+            create: (context) => AppBarCubit(ChartsChosenState(title: Text("")))
+              ..toggleTitleCharts(),
           ),
         ],
         child: HomePage(),

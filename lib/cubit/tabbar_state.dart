@@ -7,7 +7,7 @@
 //   final bool isFailed;
 // }
 
-abstract class TabBarState{}
+abstract class TabBarState {}
 
 class EmptyTabState extends TabBarState {}
 
@@ -19,4 +19,3 @@ class LoadedTabState extends TabBarState {
   List<dynamic> loadedData;
   LoadedTabState({required this.loadedData});
 }
-

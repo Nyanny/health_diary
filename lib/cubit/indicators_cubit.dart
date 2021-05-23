@@ -7,13 +7,12 @@ class IndicatorsCubit extends Cubit<TabBarState> {
 
   final IndicatorsRepository repository;
 
-  Future<void> load() async{
+  Future<void> load() async {
     try {
       emit(LoadingTabState());
       final List indicators = await this.repository.getData();
       emit(LoadedTabState(loadedData: indicators));
-    }
-    catch (e){
+    } catch (e) {
       emit(ErrorLoadingTabState());
     }
   }
