@@ -24,7 +24,14 @@ class Charts extends StatelessWidget {
       if (state is LoadedTabState) {
         // List<double> chartData = state.loadedData as List<double>;
         return Container(
+          height: 256.0,
+          // padding: const EdgeInsets.only(top: 50.0),
+          padding: const EdgeInsets.symmetric(vertical: 50.0),
           child: SfSparkLineChart(
+            color: Colors.red,
+            //Enable PlotBand
+            plotBand: SparkChartPlotBand(
+                start: 50, end: 60, color: Colors.greenAccent),
             //Enable the trackball
             trackball: SparkChartTrackball(
                 activationMode: SparkChartActivationMode.tap),
@@ -33,6 +40,8 @@ class Charts extends StatelessWidget {
                 SparkChartMarker(displayMode: SparkChartMarkerDisplayMode.all),
             //Enable data label
             labelDisplayMode: SparkChartLabelDisplayMode.all,
+            labelStyle: TextStyle(
+                color: Colors.red, background: Paint()..color = Colors.white),
             data: state.loadedData as List<double>,
           ),
         );
